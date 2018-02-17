@@ -1,0 +1,10 @@
+<h1>Welcome to the people page</h1>
+{% if all_people %}
+  <ul>
+  {% for person in all_people %}
+    <li><a href="{% url 'people:detail' person.name %}">{{person.name}}</a></li>
+  {% endfor %}
+  </ul>
+{% else %}
+  <p> There are no people in the database </p>
+{% endif %}

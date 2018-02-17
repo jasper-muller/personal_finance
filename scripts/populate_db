@@ -1,0 +1,21 @@
+import csv
+from show_balance.models import Transaction
+import os
+import django
+from django.conf import settings
+
+settings.configure(DJANGO_SETTINGS_MODULE='personal_finance.settings')
+settings.setup()
+
+csv_path =  '/Users/Jasper/Downloads/0707617472_08102017_182033.csv'
+
+with open(csv_path) as f:
+    reader = csv.reader(f)
+    for i, row in enumerate(reader):
+        _, created = Transaction.objects.get_or_create(
+            id = i,
+            amount = row[10],
+            timestamp = row[0],
+            sender = row[2],
+            receiver = row[1]
+        )
